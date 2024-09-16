@@ -15,7 +15,7 @@
                 const ipAddress = gistContent.trim();  // Assuming the IP is the only content in the file
 
                 // Redirect to the local IP with port 8080 and proper http:// protocol
-                const redirectUrl = `http://${ipAddress}:8080`;
+                const redirectUrl = `http://${ipAddress}:8080`;  // Fix: Added backticks to form the URL string
                 window.location.replace(redirectUrl); // Use location.replace to avoid appending base URL
 
                 // Update the link in case redirection fails
