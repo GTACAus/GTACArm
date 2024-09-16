@@ -16,7 +16,7 @@
 
                 // Redirect to the local IP with port 8080 and proper http:// protocol
                 const redirectUrl = `http://${ipAddress}:8080`;
-                window.location.href = redirectUrl;
+                window.location.replace(redirectUrl); // Use location.replace to avoid appending base URL
 
                 // Update the link in case redirection fails
                 document.getElementById('manualLink').href = redirectUrl;
