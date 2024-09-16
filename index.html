@@ -2,10 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0;url=http://192.168.100.154:8080">
     <title>Redirecting to GTAC Arm...</title>
+    <script>
+        async function redirectToLocalIP() {
+            try {
+                // Fetch the Gist content
+                const response = await fetch('https://api.github.com/gists/fd91dfe5e8f832a558f6454287bde824');
+                const data = await response.json();
+
+                // Extract the IP address from the Gist file content
+                const gistContent = data.files['localip.txt'].content;
+                const ipAddress = gistContent.trim();  // Assuming the IP is the only content in the file
+
+                // Redirect to the local IP with port 8080
+                const redirectUrl = `http://${ipAddress}:8080`;
+                window.location.href = redirectUrl;
+
+                // Update the link in case redirection fails
+                document.getElementById('manualLink').href = redirectUrl;
+
+            } catch (error) {
+                console.error('Error fetching Gist or redirecting:', error);
+                alert('Failed to redirect to local IP. Please try again.');
+            }
+        }
+
+        // Trigger the redirection once the page loads
+        window.onload = redirectToLocalIP;
+    </script>
 </head>
 <body>
-    <p>If you are not redirected automatically, follow this <a href="http://192.168.100.154:8080">link</a>.</p>
+    <p>If you are not redirected automatically, follow this <a id="manualLink" href="#">link</a>.</p>
 </body>
 </html>
